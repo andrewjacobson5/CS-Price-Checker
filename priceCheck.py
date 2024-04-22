@@ -1,3 +1,5 @@
+# Andrew Jacobson 2024
+
 import tkinter as tk
 import requests
 
