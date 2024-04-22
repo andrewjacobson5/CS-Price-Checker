@@ -54,8 +54,6 @@ knives = {
     "stiletto": "★%20Stiletto%20Knife%20%7C%20",
     "talon": "★%20Talon%20Knife%20%7C%20",
     "ursus": "★%20Ursus%20Knife%20%7C%20"
-
-
 }
 
 wear = {
@@ -66,7 +64,6 @@ wear = {
     "bs": "(Battle-Scarred)"
 }
 
-# Function to get price and volume data
 def get_price_and_volume():
     weapon_in = weapon_entry.get().lower()
     if " " in weapon_in:
