@@ -1,7 +1,6 @@
 import tkinter as tk
 import requests
 
-# Weapon and wear dictionaries remain the same
 weapon = {
     "ak47": "AK-47%20%7C%20",
     "aug": "AUG%20%7C%20",
@@ -9,9 +8,9 @@ weapon = {
     "bizon": "PP-Bizon%20%7C%20",
     "cz75": "CZ75-Auto%20%7C%20",
     "deagle": "Desert%20Eagle%20%7C%20",
-    "dual_berettas": "Dual%20Berettas%20%7C%20",
+    "dualberettas": "Dual%20Berettas%20%7C%20",
     "famas": "FAMAS%20%7C%20",
-    "five_seven": "Five-SeveN%20%7C%20",
+    "fiveseven": "Five-SeveN%20%7C%20",
     "g3sg1": "G3SG1%20%7C%20",
     "galil": "Galil%20AR%20%7C%20",
     "glock18": "Glock-18%20%7C%20",
@@ -27,14 +26,34 @@ weapon = {
     "p2000": "P2000%20%7C%20",
     "p250": "P250%20%7C%20",
     "p90": "P90%20%7C%20",
-    "sawed_off": "Sawed-Off%20%7C%20",
+    "sawedoff": "Sawed-Off%20%7C%20",
     "scar20": "SCAR-20%20%7C%20",
     "sg553": "SG%20553%20%7C%20",
-    "ssg08": "SSG%2008%20%7C%20",
+    "scout": "SSG%2008%20%7C%20",
     "tec9": "Tec-9%20%7C%20",
     "ump45": "UMP-45%20%7C%20",
-    "usp_silencer": "USP-S%20%7C%20",
+    "usps": "USP-S%20%7C%20",
     "xm1014": "XM1014%20%7C%20"
+}
+knives = {
+    "bayonet": "★%20Bayonet%20%7C%20",
+    "bowie": "★%20Bowie%20Knife%20%7C%20",
+    "butterfly": "★%20Butterfly%20Knife%20%7C%20",
+    "falchion": "★%20Falchion%20Knife%20%7C%20",
+    "flip": "★%20Flip%20Knife%20%7C%20",
+    "gut": "★%20Gut%20Knife%20%7C%20",
+    "huntsman": "★%20Huntsman%20Knife%20%7C%20",
+    "karambit": "★%20Karambit%20%7C%20",
+    "m9bayonet": "★%20M9%20Bayonet%20%7C%20",
+    "navaja": "★%20Navaja%20Knife%20%7C%20",
+    "nomad": "★%20Nomad%20Knife%20%7C%20",
+    "paracord": "★%20Paracord%20Knife%20%7C%20",
+    "skeleton": "★%20Skeleton%20Knife%20%7C%20",
+    "stiletto": "★%20Stiletto%20Knife%20%7C%20",
+    "talon": "★%20Talon%20Knife%20%7C%20",
+    "ursus": "★%20Ursus%20Knife%20%7C%20"
+
+
 }
 
 wear = {
@@ -48,15 +67,25 @@ wear = {
 # Function to get price and volume data
 def get_price_and_volume():
     weapon_in = weapon_entry.get().lower()
+    if " " in weapon_in:
+        weapon_in = weapon_in.replace(" ", "")
+           
     skin_in = skin_entry.get().title()
     wear_in = wear_entry.get()
     
     new_url = default_url
     
     if stattrak_var.get():
-        new_url += "StatTrak™%20"
+        if weapon_in in weapon:
+            new_url += "StatTrak™%20"
 
-    new_url += weapon.get(weapon_in, "")
+    if weapon_in in weapon:
+        new_url += weapon.get(weapon_in, "")
+    elif weapon_in in knives:
+        new_url += knives.get(weapon_in, "")
+    else:
+        price_label.config(text="Invalid weapon")
+        return
 
     if new_url:
         if " " in skin_in:
@@ -76,12 +105,12 @@ def get_price_and_volume():
     elif lowest_price:
         price_label.config(text=f"Lowest Price: {lowest_price}")
     else:
-        price_label.config(text="No price found")
+        price_label.config(text="No price found: Either float capped or none on market")
 
     if volume:
         volume_label.config(text=f"Volume: {volume}")
     else:
-        volume_label.config(text="No volume found")
+        volume_label.config(text="No volume found: Either float capped or none on market")
 
 # GUI setup
 root = tk.Tk()
