@@ -53,7 +53,8 @@ knives = {
     "skeleton": "★%20Skeleton%20Knife%20%7C%20",
     "stiletto": "★%20Stiletto%20Knife%20%7C%20",
     "talon": "★%20Talon%20Knife%20%7C%20",
-    "ursus": "★%20Ursus%20Knife%20%7C%20"
+    "ursus": "★%20Ursus%20Knife%20%7C%20",
+    "kukri": "★%20Kukri%20Knife%20%7C%20"
 }
 
 wear = {
